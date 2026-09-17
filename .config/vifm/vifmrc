@@ -1,0 +1,224 @@
+
+" ============================================================
+" VIFM — minimal TokyoNight
+" ============================================================
+
+" -------------------- General -------------------------------
+
+set dotfiles
+set sort=+dir,+iname,-mode
+set nofollowlinks
+
+set nowrap
+set history=100
+set undolevels=100
+
+set vicmd=nvim
+set showtabline=never
+set timefmt=%m.%d.%Y\ %H:%M
+set statusline="  %t%= %20d "
+set tabscope=pane
+
+set wildmenu
+set wildstyle=popup
+
+set ignorecase
+set smartcase
+set nohlsearch
+set incsearch
+set scrolloff=5
+
+" -------------------- View columns ---------------------------
+
+set viewcolumns=-65%{name},10%{ext}
+
+nnoremap fd :set viewcolumns=-{name}..,21{mtime}<cr> 
+
+" t — тип файла 
+nnoremap ft :set viewcolumns=-{name}..,10{ext}<cr>
+
+" c — скрыть дополнительную информацию 
+nnoremap fc :set viewcolumns=-{name}..<cr>
+
+
+" ---------------------- Border ---------------------------------
+
+set tuioptions=psuv
+
+set fillchars=vborder:│,hborder:─
+" -------------------- Colorscheme ----------------------------------
+
+colorscheme tokyonight-modern
+
+" -------------------- Icons ----------------------------------
+
+set classify='  :dir:/,󰲽 :exe:,  :reg:,󰴝 :link:'
+set classify+=' ::../::, ::*.sh::, ::*.[hc]pp::, ::*.[hc]::'
+set classify+=' ::.git/,,*.git/::, ::*.epub,,*.fb2,,*.djvu::'
+set classify+=' ::*.pdf::,󰖟 ::*.htm,,*.html,,*.xml::'
+set classify+='󰛫 ::*.7z,,*.gz,,*.rar,,*.tar,,*.xz,,*.zip::'
+set classify+=' ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.webp::'
+set classify+=' ::*.aac,,*.flac,,*.m4a,,*.mp3,,*.ogg,,*.wav::'
+set classify+=' ::*.avi,,*.mkv,,*.mov,,*.mp4,,*.webm::'
+set classify+=' ::*.doc,,*.docx::, ::*.xls,,*.xlsx::'
+set classify+=' ::*.ppt,,*.pptx::, ::*.txt::'
+set classify+=' ::*.kdbx::'
+
+" -------------------- Bookmarks ------------------------------
+
+mark h ~/
+mark d ~/Downloads
+mark p ~/Pictures
+mark w ~/.local/share/backgrounds
+mark s ~/.local/src
+
+" -------------------- Commands -------------------------------
+
+command! mkd :mkdir %a
+command! mkf :touch %a
+command! mkcd :mkdir %a | cd %a
+command! reload :write | restart
+
+" ----------------------- Smb ----------------------------------
+
+
+command! smb :!mkdir -p /home/admin/mnt/%a && sudo mount -t cifs -o credentials=/mnt/Disk/cred/.smbcred,iocharset=utf8,uid=$(id -u),gid=$(id -g),file_mode=0664,dir_mode=0775,noperm '//%a/C$' /home/admin/mnt/%a && vifm /home/admin/mnt/%a && sudo umount /home/admin/mnt/%a && rmdir /home/admin/mnt/%a
+
+" -------------------- Navigation -----------------------------
+
+nnoremap . za
+nnoremap s :shell<cr>
+nnoremap S :sort<cr>
+
+nnoremap <space>t :tabnew<cr>
+nnoremap <space>j :tabprevious<cr>
+nnoremap <space>k :tabnext<cr>
+nnoremap <space>x :tabclose<cr>
+
+" -------------------- Files ----------------------------------
+
+nnoremap I cw<c-a>
+nnoremap cc cw<c-u>
+nnoremap A cw
+
+nnoremap <f5> :copy<cr>
+nnoremap <f6> :move<cr>
+nnoremap <f7> :mkdir<space>
+nnoremap <f8> :delete<cr>
+
+" -------------------- Editor ---------------------------------
+
+nnoremap <f4> :edit<cr>
+nnoremap O :!doas nvim %f<cr>
+
+" -------------------- Preview --------------------------------
+
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
+
+" -------------------- Wallpaper ------------------------------
+
+nnoremap bg :!xwallpaper --zoom %f<cr>
+
+" -------------------- Clipboard ------------------------------
+
+if executable('xclip')
+    nnoremap yd :!echo %d | xclip %i<cr>
+    nnoremap yf :!echo %c:p | xclip %i<cr>
+elseif executable('xsel')
+    nnoremap yd :!echo -n %d | xsel --clipboard --input %i<cr>
+    nnoremap yf :!echo -n %c:p | xsel --clipboard --input %i<cr>
+endif
+
+" -------------------- Quit -----------------------------------
+
+nnoremap q :q<cr>
+
+" -------------------- Vifmrc reload ---------------------------
+
+nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
+
+" ---------------- INFO File and Folder ----------------------
+
+" nnoremap <space> :!~/.config/vifm/scripts/vifm-preview.sh %c | less -R<CR>
+
+
+
+" -------------------- Preview file content ---------------------------
+
+fileviewer *.md,*.txt,*.conf,*.cfg,*.ini,*.sh,*.bash,*.zsh,*.py,*.lua,*.vim,*.json,*.yaml,*.yml,*.xml,*.html,*.css ~/.config/vifm/scripts/vifm-preview.sh %c
+
+filextype *.pdf
+        \ libreoffice --draw %f
+fileviewer *.pdf
+        \ vifmimg pdf %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    filextype *.djvu
+        \ libreoffice --draw %f
+    fileviewer *.djvu
+        \ vifmimg djvu %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.epub
+        \ vifmimg epub %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    filextype *.avi,*.mp4,*.wmv,*.mkv,*.mpg,*.mpeg,*.vob,*.mov,*.webm,*.m4v
+        \ mpv %f
+
+    fileviewer <video/*>
+        \ vifmimg video %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    filextype *.xcf
+        \ gimp %f
+    filextype *.png,*.jpg,*jpeg,*.bmp,*.gif,*.xpm
+        \ gthumb %f
+    fileviewer <image/*>
+        \ vifmimg draw %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.mp3
+        \ mp3info
+    filextype *.mp3
+        \ mpv %f
+    fileviewer <audio/*>
+        \ vifmimg audio %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer <font/*>
+        \ vifmimg font %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.odt,*.doc,*.docx,*.rtf
+        \  libreoffice --writer %f
+
+    filextype *.odt,*.doc,*.docx,*.rtf
+        \  libreoffice --writer %f
+
+    fileviewer *.ods,*.xls,*.xlsx,*.csv
+    	\  libreoffice --calc %f
+
+    filextype *.ods,*.xls,*.xlsx,*.csv
+    	\  libreoffice --calc %f
+
+    fileviewer *.odp,*.ppt,*.pptx
+    	\  libreoffice --impress %f
+
+    filextype *.odp,*.ppt,*.pptx
+    	\  libreoffice --impress %f
+
+    fileviewer *.sh,*.txt,*.config,*.conf,*.vim,*.rc,*.*rc,*.h
+        "\ batcat %f
+        \ cat %f
+    filextype *.sh,*.txt,*.config,*.conf,*.vim,*.rc,*.*rc,*.h
+        \ nvim %f
+

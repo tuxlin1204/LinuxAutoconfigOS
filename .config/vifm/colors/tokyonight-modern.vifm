@@ -1,0 +1,190 @@
+" ============================================================
+" TokyoNight Modern
+" Transparent Glass / Box Style
+" ============================================================
+
+
+" ============================================================
+" PANELS
+" ============================================================
+
+highlight Win
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=default
+
+highlight OtherWin
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=default
+
+highlight AuxWin
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=default
+
+
+" ============================================================
+" FRAME
+" ============================================================
+
+" Vertical + horizontal borders
+highlight Border
+        \ cterm=none
+        \ ctermfg=61
+        \ ctermbg=default
+
+
+" ============================================================
+" PANEL HEADER
+" ============================================================
+
+highlight TopLine
+        \ cterm=none
+        \ ctermfg=61
+        \ ctermbg=default
+
+highlight TopLineSel
+        \ cterm=bold
+        \ ctermfg=117
+        \ ctermbg=default
+
+
+" ============================================================
+" CURRENT LINE
+" ============================================================
+
+highlight CurrLine
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=236
+
+
+" ============================================================
+" SELECTED
+" ============================================================
+
+highlight Selected
+        \ cterm=bold
+        \ ctermfg=189
+        \ ctermbg=238
+
+
+" ============================================================
+" DIRECTORIES
+" ============================================================
+
+highlight Directory
+        \ cterm=bold
+        \ ctermfg=117
+        \ ctermbg=default
+
+
+" ============================================================
+" LINKS
+" ============================================================
+
+highlight Link
+        \ cterm=none
+        \ ctermfg=117
+        \ ctermbg=default
+
+highlight BrokenLink
+        \ cterm=bold
+        \ ctermfg=210
+        \ ctermbg=default
+
+
+" ============================================================
+" EXECUTABLES
+" ============================================================
+
+highlight Executable
+        \ cterm=none
+        \ ctermfg=114
+        \ ctermbg=default
+
+
+" ============================================================
+" SPECIAL FILES
+" ============================================================
+
+highlight Device
+        \ cterm=none
+        \ ctermfg=221
+        \ ctermbg=default
+
+highlight Socket
+        \ cterm=none
+        \ ctermfg=213
+        \ ctermbg=default
+
+highlight Fifo
+        \ cterm=none
+        \ ctermfg=215
+        \ ctermbg=default
+
+
+" ============================================================
+" TABS
+" ============================================================
+
+highlight TabLine
+        \ cterm=none
+        \ ctermfg=60
+        \ ctermbg=default
+
+highlight TabLineSel
+        \ cterm=bold
+        \ ctermfg=117
+        \ ctermbg=default
+
+
+" ============================================================
+" STATUS
+" ============================================================
+
+highlight StatusLine
+        \ cterm=none
+        \ ctermfg=146
+        \ ctermbg=default
+
+
+" ============================================================
+" COMMAND LINE
+" ============================================================
+
+highlight CmdLine
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=default
+
+
+" ============================================================
+" ERROR
+" ============================================================
+
+highlight ErrorMsg
+        \ cterm=bold
+        \ ctermfg=210
+        \ ctermbg=default
+
+
+" ============================================================
+" COMPLETION
+" ============================================================
+
+highlight WildMenu
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=236
+
+highlight WildBox
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=236
+
+highlight SuggestBox
+        \ cterm=none
+        \ ctermfg=189
+        \ ctermbg=236
