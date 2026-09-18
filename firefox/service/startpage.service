@@ -1,0 +1,21 @@
+
+[Unit]
+
+Description=Simple Python HTTP Server
+
+After=network.target
+
+[Service]
+
+User=root
+
+WorkingDirectory=/etc/firefox/tartarus-startpage
+
+ExecStart=/usr/bin/python3 -m http.server 8000
+
+Restart=always
+
+[Install]
+
+WantedBy=multi-user.target
+
