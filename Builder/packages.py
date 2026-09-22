@@ -14,6 +14,7 @@ BASE_PACKAGES = [
     "wl-clipboard", # Буфер обмена для Wayland
     "pinentry-qt", # Окно ввода пароля
     "browserpass-firefox", # Расширение для firefox
+    "vifm", # Терминальный файловый менеджер
 ]
 
 DEV_PACKAGES = [

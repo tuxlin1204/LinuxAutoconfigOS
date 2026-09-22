@@ -22,7 +22,7 @@ class UserInterface:
 
     @staticmethod
     def get_params():
-        print("1) Install all dotfiles? [Y/n]: ", end="")
+        print("1) Install and custom all? [Y/n]: ", end="")
         option_1 = UserInterface.is_verify_response(input())
         
         print("2) Update Arch DataBase? [Y/n] ", end="")

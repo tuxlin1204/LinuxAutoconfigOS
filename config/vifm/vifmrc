@@ -30,7 +30,8 @@ set scrolloff=5
 
 " -------------------- View columns ---------------------------
 
-set viewcolumns=-65%{name},10%{ext}
+
+set viewcolumns=-65%{name}
 
 nnoremap fd :set viewcolumns=-{name}..,21{mtime}<cr> 
 
